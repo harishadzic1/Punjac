@@ -30,6 +30,8 @@ Princip rada:
     * Nakon klika na to polje se ispisuje poruka da je punjac zauzet i da se odabere neki drugi punjac.
 * Nakon odabira punjaca on ostaje ukljucen 30 minuta. Nakon isteka tog vremena se relej iskljucuje i brise se vrijeme u odgovarajucem polju
 
+Video demo rada: https://youtu.be/zzRDs8jJQT8
+
 Stvari koje je potrebno dodati:
 
 * Zetonjeru da se moze i skupiti koja marka 
