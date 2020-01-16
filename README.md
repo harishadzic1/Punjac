@@ -2,7 +2,7 @@
 
 Instrukcije i opis rada sistema implementiranog na Raspberry Pi 3.
 
-Kod je napisan u Pythonu i za GUI je koristen paket GUI Zero - fajl [testni.py] testni.py.
+Kod je napisan u Pythonu i za GUI je koristen paket GUI Zero - fajl [testni.py] (testni.py).
 
 Koristene komponente:
 
