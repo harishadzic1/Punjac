@@ -1,9 +1,24 @@
 # Punjac
 
-#Instrukcije i opis rada sistema implementiranog na Raspberry Pi 3.
+Instrukcije i opis rada sistema implementiranog na Raspberry Pi 3.
 
 Kod je napisan u Pythonu i za GUI je koristen paket GUI Zero - fajl testni.py.
-Raspberry Pi 
+
+Koristene komponente:
+
+*Raspberry Pi 3 - CPU
+*16 Relay Module - aktiviranje punjaca
+*Touch screen
+*VGA <-> HDMI konverter kabal
+*74HC595 Shift registar 
+*ULN2003A Darlingtonovi parovi
+*Napajanje 5V 40A
+
+Raspberry Pi nema VGA port koji je integrisan u monitoru pa je potreban VGA <-> HDMI konverter da sve radi bez problema. Ovaj koji koristim je u Merkatoru 15ak KM.
+
+Releji rade na 5V i aktiviraju se tako sto se na odgovarajuce pinove dovede 0V, inace je na pinovima napon 5V. Posto Raspberry Pi radi na 3V3, potrebno je malo periferne elektronike da bi se ovaj problem zaobisao. Dodatni problem je sto releji mogu da povuku dosta vecu struju nego sto pinovi Raspberry Pi mogu da obezbijede. Rjesenje je u kombinaciji 74HC595 shift registra i ULN2003A pojacavaca sa Darlingtonovim parovima. Raspberry Pi upise odgovarajucu kombinaciju bita u shift registar koji ih cuva sve dok ne dodje do neke promjene. Posto sam shift registar moze da obezbijedi maksimalnu struju od 70mA, sto nije dovoljno u slucaju da su svi releji aktivirni, potrebno je pojacati te signale i to je postignuto koristenjem ULN2003A integrisanog kola. Elektricna shema je prikazana na slici u folderu.
+
+
 
 ```
 #!/bin/bash
@@ -27,15 +42,13 @@ After you have done that, just run the script with:
     $   bash script.sh 
 ```
 
-[keyboard.py](keyboard.py): App which implements functionality of a keyboard needed for code input in case of workers forgetting their RFID cards.
-It also has a minimize/maximize button which switches between kiosk and service mode. After running, GUI opens in kiosk mode. When you press the minimize button, another window opens which asks for login code. This is done for security measures, it prevents everybody else from entering service mode. Code for minimizing is `0000`. Minimize button converts to maximize button after switching to service mode and requires no code when pressed.
-It is possible to run the system with this keyboard GUI instead of the first one. It can be run without RFID reader connected because it works only as a keyboard.
+
 
 To make this setup work just replace `CardReaderGui.py` with `keyboard.py` in `script.sh` and run it like before.
 
-Things to be added:
+Stvari koje je potrebno dodati:
 
-* Adding a unique RFID code to every person. This can be done after the RFID cards are bought and distributed to the staff.
-* Adding a new field which contains codes for keyboard access for every person.
-* Creating new GUI which combines functionalities of the two GUIs.
-* Adding a control for RFID codes and keyboard codes - if a code is entered or acquired by a reader which cannot be found in a database, do not allow access and write an appropriate message to GUI. Can be tested after both of them are inserted to the database.
+* Zetonjeru da se moze i skupiti koja marka 
+* Reklame koje ce se smjenjivati na pocetnom ekranu
+* Urediti dizajn da bude vizuelno ljepse
+** Umjesto na breadboard, zalemiti sve komponente na perfboard ili napraviti PCB
